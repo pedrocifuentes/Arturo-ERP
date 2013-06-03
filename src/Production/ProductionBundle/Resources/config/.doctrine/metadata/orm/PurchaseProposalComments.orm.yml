@@ -1,0 +1,39 @@
+PurchaseProposalComments:
+    type: entity
+    table: purchase_proposal_comments
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        comments:
+            type: text
+            nullable: true
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+    manyToOne:
+        backUsersOld:
+            targetEntity: BackUsersOld
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_users_old_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        purchaseProposal:
+            targetEntity: PurchaseProposal
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                purchase_proposal_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

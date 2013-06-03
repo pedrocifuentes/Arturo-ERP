@@ -1,0 +1,30 @@
+backcountries:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:BackCountries:index" }
+
+backcountries_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:BackCountries:show" }
+
+backcountries_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:BackCountries:new" }
+
+backcountries_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:BackCountries:create" }
+    requirements: { _method: post }
+
+backcountries_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:BackCountries:edit" }
+
+backcountries_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:BackCountries:update" }
+    requirements: { _method: post|put }
+
+backcountries_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:BackCountries:delete" }
+    requirements: { _method: post|delete }

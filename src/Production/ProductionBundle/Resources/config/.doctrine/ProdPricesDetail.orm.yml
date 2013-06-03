@@ -1,0 +1,71 @@
+Production\ProductionBundle\Entity\ProdPricesDetail:
+    type: entity
+    table: prod_prices_detail
+    id:
+        prodPricesDetailId:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: prod_prices_detail_id
+            generator:
+                strategy: AUTO
+    fields:
+        price:
+            type: decimal
+            nullable: true
+        createdAt:
+            type: datetime
+            nullable: false
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: false
+            column: updated_at
+    manyToOne:
+        backUser:
+            targetEntity: BackUsersOld
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_user_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        prodPrice:
+            targetEntity: ProdPrices
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                prod_price_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backGroupsColor:
+            targetEntity: BackGroupsColors
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_groups_color_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backModel:
+            targetEntity: BackModels
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_model_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backSize:
+            targetEntity: BackSizes
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_size_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

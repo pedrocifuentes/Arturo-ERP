@@ -1,0 +1,65 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>BackModels list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Active</th>
+                <th>Sort</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Mastersize</th>
+                <th>New</th>
+                <th>Bag</th>
+                <th>Box</th>
+                <th>Weightwhite</th>
+                <th>Weightcolor</th>
+                <th>Slug</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('backmodels_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.active }}</td>
+                <td>{{ entity.sort }}</td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.code }}</td>
+                <td>{{ entity.masterSize }}</td>
+                <td>{{ entity.new }}</td>
+                <td>{{ entity.bag }}</td>
+                <td>{{ entity.box }}</td>
+                <td>{{ entity.weightWhite }}</td>
+                <td>{{ entity.weightColor }}</td>
+                <td>{{ entity.slug }}</td>
+                <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('backmodels_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('backmodels_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('backmodels_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

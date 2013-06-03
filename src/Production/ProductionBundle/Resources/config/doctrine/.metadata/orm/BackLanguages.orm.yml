@@ -1,0 +1,33 @@
+BackLanguages:
+    type: entity
+    table: back_languages
+    id:
+        id:
+            id: true
+            type: boolean
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+        code:
+            type: string
+            length: 2
+            fixed: true
+            nullable: false
+        image:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        sort:
+            type: boolean
+            nullable: true
+        active:
+            type: boolean
+            nullable: true
+    lifecycleCallbacks: {  }

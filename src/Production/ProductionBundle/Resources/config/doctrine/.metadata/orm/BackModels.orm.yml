@@ -1,0 +1,114 @@
+BackModels:
+    type: entity
+    table: back_models
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        active:
+            type: boolean
+            nullable: true
+        sort:
+            type: integer
+            unsigned: true
+            nullable: true
+        name:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+        code:
+            type: string
+            length: 30
+            fixed: false
+            nullable: false
+        masterSize:
+            type: string
+            length: 10
+            fixed: false
+            nullable: false
+            column: master_size
+        new:
+            type: boolean
+            nullable: true
+        bag:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        box:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        weightWhite:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+            column: weight_white
+        weightColor:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+            column: weight_color
+        slug:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+    manyToMany:
+        color:
+            targetEntity: BackColors
+            cascade: {  }
+            mappedBy: null
+            inversedBy: model
+            joinTable:
+                name: back_models_has_colors
+                joinColumns:
+                    -
+                        name: model_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: color_id
+                        referencedColumnName: id
+            orderBy: null
+        size:
+            targetEntity: BackSizes
+            cascade: {  }
+            mappedBy: null
+            inversedBy: model
+            joinTable:
+                name: back_models_has_sizes
+                joinColumns:
+                    -
+                        name: model_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: size_id
+                        referencedColumnName: id
+            orderBy: null
+        prodProvider:
+            targetEntity: ProdProviders
+            cascade: {  }
+            mappedBy: backModel
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

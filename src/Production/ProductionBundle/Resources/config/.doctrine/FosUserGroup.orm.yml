@@ -1,0 +1,29 @@
+Production\ProductionBundle\Entity\FosUserGroup:
+    type: entity
+    table: fos_user_group
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+        roles:
+            type: array
+            nullable: false
+    manyToMany:
+        user:
+            targetEntity: FosUserUser
+            cascade: {  }
+            mappedBy: group
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

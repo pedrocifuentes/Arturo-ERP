@@ -1,0 +1,8 @@
+<br><br><br>
+Hi {{ adminUser }},
+<br><br><br>
+{{ emailFrom }} has requested your approving for the following purchase proposal {{ prodOrder.docNo }}<br><br>
+Products: {{ prodOrderDetail.backModel }} {{ prodOrderDetail.backModel.code }}<br><br>
+Total items: {{ prodOrder.docItems }} Units<br><br>
+Go to the Purchase proposal: <a href="{{ url('prodorders_edit', { 'id': prodOrder.id }) }}">{{ url('prodorders_edit', { 'id': prodOrder.id }) }}</a><br><br><br>
+If you have any problem regarding this mail, you can mail us to <a href="mailto:soporte@jhktrader.com">soporte@jhktrader.com</a><br><br><br>

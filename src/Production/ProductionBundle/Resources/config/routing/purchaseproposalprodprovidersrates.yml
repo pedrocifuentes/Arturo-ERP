@@ -1,0 +1,30 @@
+purchaseproposalprodprovidersrates:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:PurchaseProposalProdProvidersRates:index" }
+
+purchaseproposalprodprovidersrates_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:PurchaseProposalProdProvidersRates:show" }
+
+purchaseproposalprodprovidersrates_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:PurchaseProposalProdProvidersRates:new" }
+
+purchaseproposalprodprovidersrates_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:PurchaseProposalProdProvidersRates:create" }
+    requirements: { _method: post }
+
+purchaseproposalprodprovidersrates_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:PurchaseProposalProdProvidersRates:edit" }
+
+purchaseproposalprodprovidersrates_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:PurchaseProposalProdProvidersRates:update" }
+    requirements: { _method: post|put }
+
+purchaseproposalprodprovidersrates_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:PurchaseProposalProdProvidersRates:delete" }
+    requirements: { _method: post|delete }

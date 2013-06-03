@@ -1,0 +1,230 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<script type="text/javascript" src="{{ asset('js/jquery-ui.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}" />
+<script type="text/javascript">
+function addRow(){
+    var tm = new Date().getTime();
+    $("#tblProdOrder").append($("#dumpRow tbody").html());
+    $("#tblProdOrder #newRow").attr("id", "Row_"+tm);
+    var id = "#tblProdOrder #Row_"+tm+" select#colors";
+    $(id).html("<option value=''>Select Color</option>");
+
+    $("#tblProdOrder #newDel").attr("onclick", '$("#Row_' + tm +'").remove();');
+    $("#tblProdOrder #newDel").attr("id", "delRow_"+ tm);
+}
+
+function sumRow(id){
+    var intRegex = /^\d+$/;
+    var floatRegex = /^((\d+(\.\d *)?)|((\d*\.)?\d+))$/;
+    var tmpFinalTotal = tmpRowTotal = 0;
+    $(".size").each(function(){
+        if(intRegex.test($(this).val()) || floatRegex.test($(this).val())) {
+           tmpFinalTotal = parseInt(tmpFinalTotal) + parseInt($(this).val());
+        }
+    });
+    $(".colSize_"+id).each(function(){
+        if(intRegex.test($(this).val()) || floatRegex.test($(this).val())) {
+            tmpRowTotal = parseInt(tmpRowTotal) + parseInt($(this).val());
+        }
+    });
+    $("#rowTotal_"+id).html(tmpRowTotal);
+    $("#finalTotal").html(tmpFinalTotal);
+}
+        $(document).ready(function(){
+            $( ".datepicker" ).datepicker({ "dateFormat" : "yy-mm-dd" });
+            $("#production_productionbundle_prodorderstype_docStatus").attr("disabled", "disabled");
+
+            // to reset other records
+            $("tr#row1 select.model").live("change", function(){
+                var model = $(this).val();
+                $("select.model").each(function(){
+                    $(this).val(model);
+                    $(".size").html("");
+                    $(".color").html('<option value="">Select Color</option>');
+                });
+            });
+
+            $('.model').live("change", function(){
+                if($(this).val()){
+                    var model_id = $(this).val();
+                    var old_model_id = $("tr#row1 td select#models").val();
+                    if(old_model_id != undefined){
+                        if(old_model_id != model_id){
+                            alert("Only 1 reference per purchase proposal is allowed");
+                            return false;
+                        }
+                    }
+                    var file_path = "{{ path('prodorders_getmodelcolors', { 'id': '0' }) }}";
+                    file_path = file_path.replace("/0/", "/"+ model_id +"/");
+                    var color_holder = $(this).parent().next().children();
+                    var size_holder = $(this).parent().next().next();
+
+                    $.ajax({
+                      url: file_path,
+                      beforeSend: function(){
+                            $(color_holder).attr('disabled', true);
+                      },
+                      success: function(data){
+                            $(color_holder).html(data);
+                            $(".color").html(data);
+                      },
+                      complete: function(data){
+                            $(color_holder).attr('disabled', false);
+                            var file_path2 = "{{ path('prodorders_getcolortosize') }}";
+                            var color_id = $(".color").val();
+                            $('input[name="colors[]"]').each(function(){
+                                if(color_id == $(this).val()){
+                                    alert("You can not select same color");
+                                    return false;
+                                }
+                            });
+
+                            $.ajax({
+                              url: file_path2,
+                              data: "id="+model_id+"&color_id="+color_id,
+                              beforeSend: function(){
+                                    $(size_holder).attr('disabled', true);
+                              },
+                              success: function(data){
+                                    $(size_holder).html(data);
+                                    $('#tblProdOrder input[name="colors[]"]').each(function(){
+                                        if(color_id == $(this).val()){
+                                            alert("You can not select same color");
+                                            return false;
+                                        }
+                                    });
+                              },
+                              complete: function(data){
+                                    $(size_holder).attr('disabled', false);
+                              },
+                              error: function(data){
+                                    alert(data);
+                              }
+                            });
+                      },
+                      error: function(data){
+                            alert(data);
+                      }
+                    });
+                 }else{
+                    $('#colors').html("<option value=''>Select Color</option>");
+                    $('#sizes').html("");
+                 }
+            });
+
+            $('.color').live("change", function(){
+                if($(this).val()){
+                    var model_id = $(".color").parent().prev().children().eq(1).val();
+                    var color_id = $(this).val();
+                    var file_path2 = "{{ path('prodorders_getcolortosize') }}";
+                    var size_holder = $(this).parent().next();
+
+                    $.ajax({
+                      url: file_path2,
+                      data: "id="+model_id+"&color_id="+color_id,
+                      beforeSend: function(){
+                            $(size_holder).attr('disabled', true);
+                      },
+                      success: function(data){
+                            var color_flag = false;
+                            $('input[name="colors[]"]').each(function(){
+                                alert(color_id + $(this).val());
+                                if(color_id == $(this).val()){
+                                    color_flag = true;
+                                }
+                            });
+                            if(color_flag){
+                                $(size_holder).html("");
+                                alert("You can not select same color");
+                            }else{
+                                $(size_holder).html("");
+                                $(size_holder).html(data);
+                            }
+                      },
+                      complete: function(data){
+                            $(size_holder).attr('disabled', false);
+                      },
+                      error: function(data){
+                            alert(data);
+                      }
+                    });
+
+                 }else{
+                    $('#colors').html("<option value=''>Select Color</option>");
+                    $('#sizes').html("");
+                 }
+            });
+        });
+    </script>
+
+    <h1>ProdOrders creation</h1>
+    <table id="dumpRow" style="display:none">
+        <tr id="newRow">
+            <td valign="top">
+                <br />
+                <select name="models[]" id="models" class="model">
+                    <option value="">Select Model</option>
+                    {% for model in models %}
+                        <option value="{{ model.id }}">{{ model.name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td valign="top">
+                <br />
+                <select name="colors[]" id="colors" class="color">
+                    <option value="">Select Color</option>
+                </select>
+            </td>
+            <td id="sizes" class="size">
+
+            </td>
+            <td>&nbsp;
+                <div id="rowTotal"></div>
+            </td>
+            <td><span id="newDel">x</span>  <span onclick="addRow()">+</span></td>
+        </tr>
+    </table>
+
+    <form action="{{ path('prodorders_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <br />
+        <table id="tblProdOrder">
+            <tr>
+                <td>Model</td>
+                <td>Color</td>
+                <td>Size</td>
+            </tr>
+            <tr id="row1">
+                <td valign="top">
+                    <br />
+                    <select name="models[]" id="models" class="model">
+                        <option value="">Select Model</option>
+                        {% for model in models %}
+                            <option value="{{ model.id }}">{{ model.name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td valign="top">
+                    <br />
+                    <select name="colors[]" id="colors" class="color">
+                        <option value="">Select Color</option>
+                    </select>
+                </td>
+                <td id="sizes" class="size"></td>
+                <td>&nbsp;
+                    <div id="rowTotal1"></div>
+                </td>
+                <td><span onclick="addRow()">+</span></td>
+            </tr>
+        </table>
+
+            <p>
+                Units: <span id="finalTotal"></span><br /><br />
+                <button type="submit">Create</button><br />
+                <a href="{{ path('prodorders') }}">Back to the list</a>
+            </p>
+        </form>
+
+{% endblock %}

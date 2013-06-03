@@ -1,0 +1,86 @@
+ProdOrders:
+    type: entity
+    table: prod_orders
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: IDENTITY
+    fields:
+        docNo:
+            type: string
+            length: 20
+            fixed: false
+            nullable: false
+            column: doc_no
+        docNavision:
+            type: string
+            length: 20
+            fixed: false
+            nullable: true
+            column: doc_navision
+        docItems:
+            type: integer
+            unsigned: true
+            nullable: false
+            column: doc_items
+        docDate:
+            type: date
+            nullable: false
+            column: doc_date
+        docStatus:
+            type: integer
+            unsigned: false
+            nullable: false
+            column: doc_status
+        acceptedDate:
+            type: datetime
+            nullable: false
+            column: accepted_date
+        paymentDate:
+            type: datetime
+            nullable: false
+            column: payment_date
+        paymentExchange:
+            type: decimal
+            nullable: true
+            column: payment_exchange
+        updatedAt:
+            type: datetime
+            nullable: false
+            column: updated_at
+        createdAt:
+            type: datetime
+            nullable: false
+            column: created_at
+    manyToMany:
+        prodPrice:
+            targetEntity: ProdPrices
+            cascade: {  }
+            mappedBy: null
+            inversedBy: prodOrder
+            joinTable:
+                name: prod_orders_has_prices
+                joinColumns:
+                    -
+                        name: prod_order_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: prod_price_id
+                        referencedColumnName: id
+            orderBy: null
+    manyToOne:
+        backUser:
+            targetEntity: BackUsersOld
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_user_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,30 @@
+backbusinessunittypes:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:BackBusinessUnitTypes:index" }
+
+backbusinessunittypes_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:BackBusinessUnitTypes:show" }
+
+backbusinessunittypes_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:BackBusinessUnitTypes:new" }
+
+backbusinessunittypes_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:BackBusinessUnitTypes:create" }
+    requirements: { _method: post }
+
+backbusinessunittypes_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:BackBusinessUnitTypes:edit" }
+
+backbusinessunittypes_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:BackBusinessUnitTypes:update" }
+    requirements: { _method: post|put }
+
+backbusinessunittypes_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:BackBusinessUnitTypes:delete" }
+    requirements: { _method: post|delete }

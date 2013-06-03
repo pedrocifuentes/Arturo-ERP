@@ -1,0 +1,36 @@
+BackModelsHasBackColors:
+    type: entity
+    table: back_models_has_back_colors
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        isNew:
+            type: boolean
+            nullable: true
+            column: is_new
+    manyToOne:
+        backModels:
+            targetEntity: BackModels
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_models_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backColors:
+            targetEntity: BackColors
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_colors_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

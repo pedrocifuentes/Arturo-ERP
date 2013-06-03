@@ -1,0 +1,67 @@
+BackUsersOld:
+    type: entity
+    table: back_users_old
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        username:
+            type: string
+            length: 200
+            fixed: false
+            nullable: true
+        password:
+            type: string
+            length: 200
+            fixed: false
+            nullable: true
+        nickname:
+            type: string
+            length: 200
+            fixed: false
+            nullable: true
+        email:
+            type: string
+            length: 200
+            fixed: false
+            nullable: true
+        active:
+            type: boolean
+            nullable: true
+        docStatus:
+            type: boolean
+            nullable: false
+            column: doc_status
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+    manyToOne:
+        backBusinessUnit:
+            targetEntity: BackBusinessUnits
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_business_unit_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backProfiles:
+            targetEntity: BackProfiles
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_profiles_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

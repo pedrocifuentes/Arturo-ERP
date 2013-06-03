@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Combination list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Active</th>
+                <th>Name</th>
+                <th>Catalogo</th>
+                <th>Model</th>
+                <th>Color</th>
+                <th>Size</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('combination_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.active }}</td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.catalogo }}</td>
+                <td>{{ entity.backModels }}</td>
+                <td>{{ entity.backColors }}</td>
+                <td>{{ entity.backSizes }}</td>
+                <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('combination_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('combination_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('combination_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

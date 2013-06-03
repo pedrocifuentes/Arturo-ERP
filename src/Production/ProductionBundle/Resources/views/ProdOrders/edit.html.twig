@@ -1,0 +1,359 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+<script type="text/javascript" src="{{ asset('js/jquery-ui.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}" />
+<h1>ProdOrders edit</h1>
+<table id="dumpRow" style="display:none">
+    <tr id="newRow">
+        <td valign="top">
+            <br />
+            <select name="models[]" id="models" class="model">
+                <option value="">Select Model</option>
+                    {% for model in models %}
+                <option value="{{ model.id }}">{{ model.name }}</option>
+                    {% endfor %}
+            </select>
+        </td>
+        <td valign="top">
+            <br />
+            <select name="colors[]" id="colors" class="color">
+                <option value="">Select Color</option>
+            </select>
+        </td>
+        <td id="sizes" class="size"></td>
+        <td>&nbsp;
+            <div id="rowTotal"></div>
+        </td>
+        <td><span id="newDel">x</span> <span onclick="addRow()">+</span></td>
+    </tr>
+</table>
+
+<form action="{{ path('prodorders_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <input type="hidden" name="_method" value="PUT" />
+        {{ form_widget(edit_form) }}
+    <br />
+    <table id="tblProdOrder" cellpadding="5" cellspacing="5">
+        <tr>
+            <td>Model</td>
+            <td>Color</td>
+            <td>Size</td>
+        </tr>
+            {% set old_color_id = 0 %}
+            {% set last_key = 0 %}
+            {% set new_row = false %}
+            {% for key,pod in prod_order_details %}
+                {% if old_color_id != pod.backColor.id %}
+                    {% if last_key != key %}
+        </td>
+        <td>&nbsp;<div id="rowTotal_{{ pod.backColor.id }}"></div></td>
+        <td><span onclick="rowDel('{{ last_key }}');">x</span>  <span onclick="addRow()">+</span>
+            </tr>
+                    {% endif %}
+        <tr id="Row_{{ key }}">
+            <td>
+                <span>{{ pod.backModel }}</span>
+                <input type="hidden" name="models[]" value="{{ pod.backModel.id }}" />
+                <input type="hidden" name="model_id" id="model_id" value="{{ pod.backModel.id }}" />
+            </td>
+            <td>
+                <span>{{ pod.backColor }}</span>
+                <input type="hidden" name="colors[]" value="{{ pod.backColor.id }}" />
+            </td>
+            <td>
+                <div style="float: left">
+                    <span>{{ pod.backSize }}</span>
+                    <br/>
+                    <input type="text" name="sizes[{{ pod.backColor.id }}][]" class="size colSize_{{ pod.backColor.id }}" value="{{ pod.items }}" size="5" onkeyup="sumRow({{ pod.backColor.id }})" />
+                    <input type="hidden" name="size_ids[{{ pod.backColor.id }}][]" value="{{ pod.backSize.id }}" />
+                </div>
+                            {% set old_color_id = pod.backColor.id %}
+                            {% set last_key = key %}
+                {% else %}
+                <div style="float: left">
+                    <span>{{ pod.backSize }}</span>
+                    <br/>
+                    <input type="text" name="sizes[{{ pod.backColor.id }}][]" class="size colSize_{{ pod.backColor.id }}" value="{{ pod.items }}" size="5" onkeyup="sumRow({{ pod.backColor.id }})" />
+                    <input type="hidden" name="size_ids[{{ pod.backColor.id }}][]" value="{{ pod.backSize.id }}" />
+                </div>
+                {% endif %}
+
+
+            {% endfor %}
+            </td>
+            <td>&nbsp;<div id="rowTotal_"></div></td>
+            <td><span onclick="rowDel('{{ last_key }}');">x</span>  <span onclick="addRow()">+</span>
+        </tr>
+    </table>
+    <p>
+        Units: <span id="finalTotal">{{ docitem_total }}</span><br /><br />
+        <button type="submit">Edit</button>
+        <a href="{{ path('prodorders_mail', { 'id': entity.id }) }}">Send approval mail</a>        
+        <a href="{{ path('prodorders') }}">Back to the list</a>
+    </p>        
+    <p>
+    <div style="float: left;padding: 0 15px 0 0;">
+        <select name="modelsProvider" id="modelsProvider" class="modelProvider">
+            <option value="">Select Provider</option>
+                    {% for provider in prodOrderModelProvider %}
+            <option value="{{ provider.id }}">{{ provider.name }}</option>
+                    {% endfor %}
+        </select>
+    </div>
+    <div>
+        <select name="modelsProvider" id="modelsProvider" class="modelProvider">
+            <option value="">Select Provider</option>
+                    {% for provider in prodOrderModelProvider %}
+            <option value="{{ provider.id }}">{{ provider.name }}</option>
+                    {% endfor %}
+        </select>
+    </div>
+    <p>
+
+
+        <!-- Start Comment -->
+    <h2 class="trigger">Comments<img src="{{ asset('bundles/production/images/refresh.gif') }}" title="loading..." style="display:none" id="loadingCommentList"></h2>
+    <div id="commentListing">{% include 'ProductionBundle:ProdOrders:getcomments.html.twig' %}</div>
+    <p style="height: 5px">&nbsp;</p>
+    <div id="commentInput">
+        <legend>Enter message:</legend>
+        <textarea rows="5" cols="50" name="txtComment" id="txtComment" class="txtComment"></textarea>
+        <a id="btnsendcoment" class="btn btn-success" href="javascript:void(0);">Send</a>
+        <img src="{{ asset('bundles/production/images/refresh.gif') }}" title="loading..." style="display:none" id="loadingComment">
+    </div>
+    <p style="height: 10px">&nbsp;</p>
+    <!-- END COMENTARIOS -->
+</form>
+</div>
+</form>
+<script type="text/javascript">
+            function addRow() {
+                var tm = new Date().getTime();
+                $("#tblProdOrder").append($("#dumpRow tbody").html());
+                $("#newRow").attr("id", "Row_" + tm);
+
+                $("#newDel").attr("onclick", "rowDel('" + tm + "')");
+                $("#newDel").attr("id", "delRow_" + tm);
+            }
+
+            function rowDel(key) {
+                tab_length = $('#tblProdOrder tr').length;
+                if (tab_length <= 2) {
+                    alert("Delete cancelled");
+                    return false;
+                } else {
+                    $("#Row_" + key).remove();
+                }
+            }
+
+            function sumRow(id) {
+                var intRegex = /^\d+$/;
+                var floatRegex = /^((\d+(\.\d *)?)|((\d*\.)?\d+))$/;
+                var tmpFinalTotal = tmpRowTotal = 0;
+                $(".size").each(function() {
+                    if (intRegex.test($(this).val()) || floatRegex.test($(this).val())) {
+                        tmpFinalTotal = parseInt(tmpFinalTotal) + parseInt($(this).val());
+                    }
+                });
+                $(".colSize_" + id).each(function() {
+                    if (intRegex.test($(this).val()) || floatRegex.test($(this).val())) {
+                        tmpRowTotal = parseInt(tmpRowTotal) + parseInt($(this).val());
+                    }
+                });
+                $("#rowTotal_" + id).html(tmpRowTotal);
+                $("#finalTotal").html(tmpFinalTotal);
+            }
+
+            function getComments() {
+                var getcomments_path = "{{ path('prodorders_getcomments') }}";
+                $.ajax({
+                    url: getcomments_path,
+                    data: "pid=" + "{{ entity.id }}",
+                    type: 'POST',
+                    beforeSend: function() {
+                        $('#loadingCommentList').show();
+                    },
+                    success: function(data) {
+                        $('#commentListing').html(data);
+                    },
+                    complete: function(data) {
+                        $('#loadingCommentList').hide();
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                });
+            }
+
+
+            $(document).ready(function() {
+                $(".datepicker").datepicker({"dateFormat": "yy-mm-dd"});
+
+
+                // to send Comments
+                $("#btnsendcoment").live("click", function() {
+                    var addcomment_path = "{{ path('prodorders_addcomment') }}";
+
+                    if ($.trim($('#txtComment').val()) == '')
+                        return;
+                    if ($.trim($('#txtComment').val()).length > 1000) {
+                        alert('Comment should not be more then 1000 characters.')
+                    }
+
+                    $.ajax({
+                        url: addcomment_path,
+                        data: "comment=" + $.trim($('#txtComment').val()) + "&pid=" + "{{ entity.id }}",
+                        type: 'POST',
+                        beforeSend: function() {
+                            $('#loadingComment').show();
+                        },
+                        success: function(data) {
+                            $('#txtComment').val("");
+                            getComments();
+                        },
+                        complete: function(data) {
+                            $('#loadingComment').hide();
+                            $('#txtComment').val("");
+                        },
+                        error: function(data) {
+                            console.log(data);
+                        }
+                    });
+
+                    // to delete comment
+                    $("a#delComment").live("click", function() {
+                        $.ajax({
+                            url: $(this).attr('href'),
+                            beforeSend: function() {
+                                $('#loadingCommentList').show();
+                            },
+                            success: function(data) {
+                                getComments();
+                            },
+                            complete: function(data) {
+                            },
+                            error: function(data) {
+                                console.log(data);
+                            }
+                        });
+                        return false;
+                    });
+                });
+
+
+                // to reset other records
+                $("tr#row1 select.model").live("change", function() {
+                    var model = $(this).val();
+                    $("select.model").each(function() {
+                        $(this).val(model);
+                        $(".size").html("");
+                        $(".color").html('<option value="">Select Color</option>');
+                    });
+                });
+
+                $('.model').live("change", function() {
+                    if ($(this).val()) {
+                        var model_id = $(this).val();
+                        var old_model_id = $("#model_id").val();
+                        if (old_model_id != model_id) {
+                            alert("Only 1 reference per purchase proposal is allowed");
+                            return false;
+                        }
+                        var file_path = "{{ path('prodorders_getmodelcolors', { 'id': '0' }) }}";
+                        file_path = file_path.replace("/0/", "/" + model_id + "/");
+                        var color_holder = $(this).parent().next().children();
+                        var size_holder = $(this).parent().next().next();
+
+                        $.ajax({
+                            url: file_path,
+                            beforeSend: function() {
+                                $(color_holder).attr('disabled', true);
+                            },
+                            success: function(data) {
+                                $(color_holder).html(data);
+                                $(".color").html(data);
+                            },
+                            complete: function(data) {
+                                $(color_holder).attr('disabled', false);
+                                var file_path2 = "{{ path('prodorders_getcolortosize') }}";
+                                var color_id = $(".color").val();
+
+                                $.ajax({
+                                    url: file_path2,
+                                    data: "id=" + model_id + "&color_id=" + color_id,
+                                    beforeSend: function() {
+                                        $(size_holder).attr('disabled', true);
+                                    },
+                                    success: function(data) {
+                                        $(size_holder).html(data);
+
+                                        $('input[name="colors[]"]').each(function() {
+                                            if (color_id == $(this).val()) {
+                                                alert("You can not select same color");
+                                                return false;
+                                            }
+                                        });
+                                    },
+                                    complete: function(data) {
+                                        $(size_holder).attr('disabled', false);
+                                    },
+                                    error: function(data) {
+                                        alert(data);
+                                    }
+                                });
+                            },
+                            error: function(data) {
+                                alert(data);
+                            }
+                        });
+                    } else {
+                        $('#colors').html("<option value=''>Select Color</option>");
+                        $('#sizes').html("");
+                    }
+                });
+
+                $('.color').live("change", function() {
+                    if ($(this).val()) {
+                        var model_id = $("#model_id").val();
+                        var color_id = $(this).val();
+                        var file_path2 = "{{ path('prodorders_getcolortosize') }}";
+                        var size_holder = $(this).parent().next();
+
+                        $.ajax({
+                            url: file_path2,
+                            data: "id=" + model_id + "&color_id=" + color_id,
+                            beforeSend: function() {
+                                $(size_holder).attr('disabled', true);
+                            },
+                            success: function(data) {
+                                var color_flag = false;
+                                $('input[name="colors[]"]').each(function() {
+                                    if (color_id == $(this).val()) {
+                                        color_flag = true;
+                                    }
+                                });
+                                if (color_flag) {
+                                    $(size_holder).html("");
+                                    alert("You can not select same color");
+                                } else {
+                                    $(size_holder).html("");
+                                    $(size_holder).html(data);
+                                }
+                            },
+                            complete: function(data) {
+                                $(size_holder).attr('disabled', false);
+                            },
+                            error: function(data) {
+                                alert(data);
+                            }
+                        });
+
+                    } else {
+                        $('#colors').html("<option value=''>Select Color</option>");
+                        $('#sizes').html("");
+                    }
+                });
+            });
+    </script>
+{% endblock %}

@@ -1,0 +1,20 @@
+BackBusinessUnitTypes:
+    type: entity
+    table: back_business_unit_types
+    id:
+        id:
+            id: true
+            type: boolean
+            nullable: false
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+        active:
+            type: boolean
+            nullable: true
+    lifecycleCallbacks: {  }

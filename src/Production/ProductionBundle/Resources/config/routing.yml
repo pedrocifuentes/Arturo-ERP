@@ -1,0 +1,35 @@
+production_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: ProductionBundle:Default:index }
+
+ProductionBundle_purchaseproposal:
+    resource: "@ProductionBundle/Resources/config/routing/purchaseproposal.yml"
+    prefix:   /purchaseproposal
+
+ProductionBundle_prodprovidersrates:
+    resource: "@ProductionBundle/Resources/config/routing/prodprovidersrates.yml"
+    prefix:   /prodprovidersrates
+
+ProductionBundle_purchaseproposalprodprovidersrates:
+    resource: "@ProductionBundle/Resources/config/routing/purchaseproposalprodprovidersrates.yml"
+    prefix:   /purchaseproposalprodprovidersrates
+    
+ProductionBundle_purchaseproposallog:
+    resource: "@ProductionBundle/Resources/config/routing/purchaseproposallog.yml"
+    prefix:   /purchaseproposallog
+
+ProductionBundle_purchaseproposalcomments:
+    resource: "@ProductionBundle/Resources/config/routing/purchaseproposalcomments.yml"
+    prefix:   /purchaseproposalcomments
+
+ProductionBundle_proposal_new:
+    pattern:  /proposal/new
+    defaults: { _controller: "ProductionBundle:Proposal:new" }    
+
+ProductionBundle_combination:
+    resource: "@ProductionBundle/Resources/config/routing/combination.yml"
+    prefix:   /combination
+
+ProductionBundle_prodprovidershasmodels:
+    resource: "@ProductionBundle/Resources/config/routing/prodprovidershasmodels.yml"
+    prefix:   /prodprovidershasmodels

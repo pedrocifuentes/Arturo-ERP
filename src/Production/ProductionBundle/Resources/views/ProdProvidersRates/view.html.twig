@@ -1,0 +1,72 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Providers Rates</h1>
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Rate Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Supplier Id</th>
+                <td>{{ entity.prodProviders.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ entity.prodProviders.name }}</td>
+            </tr>
+            <tr>
+                <th>Fromdate</th>
+                <td>{{ entity.fromDate|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Todate</th>
+                <td>{{ entity.toDate|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Cotton price ($/kg)</th>
+                <td>{{ entity.cottonPrice }}</td>
+            </tr>
+            <tr>
+                <th>Model</th>
+                <td>
+                    <select name="model" id="model">
+                        <option value="0">All</option>
+                        {% for model in models %}
+                            <option value="{{ model.id }}">{{ model.code }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+        </tbody>
+    </table>
+    <table width="100%">
+        <thead>
+            <th>Models</th>
+            {% for gc in group_colors %}
+                <th>{{ gc.name }}</th>
+            {% endfor %}
+        </thead>
+        <tbody>
+            {% for model in models %}
+                <tr>
+                    <td>{{ model.code }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('prodprovidersrates') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('prodprovidersrates_edit', { 'id': entity.id }) }}">
+                Edit
+            </a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,30 @@
+fosuseruser:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:FosUserUser:index" }
+
+fosuseruser_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:FosUserUser:show" }
+
+fosuseruser_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:FosUserUser:new" }
+
+fosuseruser_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:FosUserUser:create" }
+    requirements: { _method: post }
+
+fosuseruser_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:FosUserUser:edit" }
+
+fosuseruser_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:FosUserUser:update" }
+    requirements: { _method: post|put }
+
+fosuseruser_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:FosUserUser:delete" }
+    requirements: { _method: post|delete }

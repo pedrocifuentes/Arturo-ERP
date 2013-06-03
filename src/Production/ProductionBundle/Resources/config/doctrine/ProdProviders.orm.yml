@@ -1,0 +1,72 @@
+Production\ProductionBundle\Entity\ProdProviders:
+    type: entity
+    table: prod_providers
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 150
+            fixed: false
+            nullable: false
+        contact:
+            type: string
+            length: 150
+            fixed: false
+            nullable: true
+        cifNif:
+            type: string
+            length: 15
+            fixed: false
+            nullable: true
+            column: cif_nif
+        address:
+            type: string
+            length: 200
+            fixed: false
+            nullable: true
+        phone:
+            type: string
+            length: 100
+            fixed: false
+            nullable: true
+        email:
+            type: string
+            length: 200
+            fixed: false
+            nullable: true
+        active:
+            type: boolean
+            nullable: true
+        createAt:
+            type: datetime
+            nullable: true
+            column: create_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+    manyToMany:
+        backModel:
+            targetEntity: BackModels
+            cascade: {  }
+            mappedBy: null
+            inversedBy: prodProvider
+            joinTable:
+                name: prod_providers_has_models
+                joinColumns:
+                    -
+                        name: prod_provider_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: back_model_id
+                        referencedColumnName: id
+            orderBy: null
+    lifecycleCallbacks: {  }

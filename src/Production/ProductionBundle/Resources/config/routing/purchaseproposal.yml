@@ -1,0 +1,30 @@
+purchaseproposal:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:PurchaseProposal:index" }
+
+purchaseproposal_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:PurchaseProposal:show" }
+
+purchaseproposal_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:PurchaseProposal:new" }
+
+purchaseproposal_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:PurchaseProposal:create" }
+    requirements: { _method: post }
+
+purchaseproposal_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:PurchaseProposal:edit" }
+
+purchaseproposal_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:PurchaseProposal:update" }
+    requirements: { _method: post|put }
+
+purchaseproposal_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:PurchaseProposal:delete" }
+    requirements: { _method: post|delete }

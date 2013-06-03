@@ -1,0 +1,30 @@
+backgroupscolors:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:BackGroupsColors:index" }
+
+backgroupscolors_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:BackGroupsColors:show" }
+
+backgroupscolors_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:BackGroupsColors:new" }
+
+backgroupscolors_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:BackGroupsColors:create" }
+    requirements: { _method: post }
+
+backgroupscolors_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:BackGroupsColors:edit" }
+
+backgroupscolors_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:BackGroupsColors:update" }
+    requirements: { _method: post|put }
+
+backgroupscolors_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:BackGroupsColors:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,30 @@
+backcolors:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:BackColors:index" }
+
+backcolors_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:BackColors:show" }
+
+backcolors_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:BackColors:new" }
+
+backcolors_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:BackColors:create" }
+    requirements: { _method: post }
+
+backcolors_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:BackColors:edit" }
+
+backcolors_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:BackColors:update" }
+    requirements: { _method: post|put }
+
+backcolors_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:BackColors:delete" }
+    requirements: { _method: post|delete }

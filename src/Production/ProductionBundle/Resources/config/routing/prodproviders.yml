@@ -1,0 +1,30 @@
+prodproviders:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:ProdProviders:index" }
+
+prodproviders_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:ProdProviders:show" }
+
+prodproviders_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:ProdProviders:new" }
+
+prodproviders_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:ProdProviders:create" }
+    requirements: { _method: post }
+
+prodproviders_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:ProdProviders:edit" }
+
+prodproviders_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:ProdProviders:update" }
+    requirements: { _method: post|put }
+
+prodproviders_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:ProdProviders:delete" }
+    requirements: { _method: post|delete }

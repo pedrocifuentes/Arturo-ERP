@@ -1,0 +1,46 @@
+PurchaseProposalLog:
+    type: entity
+    table: purchase_proposal_log
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        docStatus:
+            type: integer
+            unsigned: false
+            nullable: false
+            column: doc_status
+        docAction:
+            type: integer
+            unsigned: false
+            nullable: false
+            column: doc_action
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+    manyToOne:
+        backUsersOld:
+            targetEntity: BackUsersOld
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_users_old_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        purchaseProposal:
+            targetEntity: PurchaseProposal
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                purchase_proposal_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,69 @@
+Production\ProductionBundle\Entity\PurchaseProposal:
+    type: entity
+    table: purchase_proposal
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        docNo:
+            type: string
+            length: 20
+            fixed: false
+            nullable: false
+            column: doc_no
+        docNavisionId:
+            type: string
+            length: 20
+            fixed: false
+            nullable: true
+            column: doc_navision_id
+        docPieces:
+            type: integer
+            unsigned: true
+            nullable: false
+            column: doc_pieces
+        docDate:
+            type: date
+            nullable: false
+            column: doc_date
+        docStatus:
+            type: integer
+            unsigned: false
+            nullable: false
+            column: doc_status
+        docDelete:
+            type: boolean
+            nullable: false
+            column: doc_delete
+        acceptedDate:
+            type: datetime
+            nullable: false
+            column: accepted_date
+        paymentDate:
+            type: datetime
+            nullable: true
+            column: payment_date
+        paymentExchange:
+            type: decimal
+            nullable: true
+            column: payment_exchange
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+    manyToOne:
+        backUsersOld:
+            targetEntity: BackUsersOld
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_users_old_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

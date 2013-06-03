@@ -1,0 +1,59 @@
+Production\ProductionBundle\Entity\BackCountries:
+    type: entity
+    table: back_countries
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: string
+            length: 2
+            fixed: true
+            nullable: false
+        latitude:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        longitude:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        address:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        zoom:
+            type: boolean
+            nullable: true
+        catalog:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        email:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        active:
+            type: boolean
+            nullable: true
+    manyToOne:
+        backLanguage:
+            targetEntity: BackLanguages
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_language_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

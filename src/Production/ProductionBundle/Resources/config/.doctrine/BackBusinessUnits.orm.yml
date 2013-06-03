@@ -1,0 +1,88 @@
+Production\ProductionBundle\Entity\BackBusinessUnits:
+    type: entity
+    table: back_business_units
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+        code:
+            type: string
+            length: 100
+            fixed: false
+            nullable: false
+        address:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+        phone:
+            type: string
+            length: 100
+            fixed: false
+            nullable: true
+        fax:
+            type: string
+            length: 100
+            fixed: false
+            nullable: true
+        email:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        latitude:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        longitude:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        address1:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        address2:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        sort:
+            type: boolean
+            nullable: true
+        active:
+            type: boolean
+            nullable: true
+    manyToOne:
+        backCountry:
+            targetEntity: BackCountries
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_country_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backBusinessUnitType:
+            targetEntity: BackBusinessUnitTypes
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_business_unit_type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,30 @@
+backlanguages:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:BackLanguages:index" }
+
+backlanguages_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:BackLanguages:show" }
+
+backlanguages_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:BackLanguages:new" }
+
+backlanguages_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:BackLanguages:create" }
+    requirements: { _method: post }
+
+backlanguages_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:BackLanguages:edit" }
+
+backlanguages_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:BackLanguages:update" }
+    requirements: { _method: post|put }
+
+backlanguages_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:BackLanguages:delete" }
+    requirements: { _method: post|delete }

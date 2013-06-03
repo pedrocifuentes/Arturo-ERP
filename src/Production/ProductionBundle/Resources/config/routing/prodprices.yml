@@ -1,0 +1,45 @@
+prodprices:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:ProdPrices:index" }
+
+prodprices_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:ProdPrices:show" }
+
+prodprices_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:ProdPrices:new" }
+
+prodprices_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:ProdPrices:create" }
+    requirements: { _method: post }
+
+prodprices_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:ProdPrices:edit" }
+
+prodprices_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:ProdPrices:update" }
+    requirements: { _method: post|put }
+
+prodprices_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:ProdPrices:delete" }
+    requirements: { _method: post|delete }
+
+prodprices_pricelist:
+    pattern:  /{id}/pricelist
+    defaults: { _controller: "ProductionBundle:ProdPrices:pricelist" }
+
+prodprices_view:
+    pattern:  /{id}/view
+    defaults: { _controller: "ProductionBundle:ProdPrices:view" }
+
+prodprices_saveprice:
+    pattern:  /save_price
+    defaults: { _controller: "ProductionBundle:ProdPrices:saveprice" }
+
+ 
+    

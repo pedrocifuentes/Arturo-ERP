@@ -1,0 +1,46 @@
+{% if comments|length > 0 %}
+<table class="records_list" style="width: 500px">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Comment</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.backUser }}</td>
+                <td>{{ comment.comment }}</td>
+                <td>{% if comment.createdAt %}{{ comment.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <a id="delComment" href="{{ path('prodorders_delcomments', { 'id': comment.id }) }}">delete</a><img src="{{ asset('bundles/production/images/refresh.gif') }}" title="loading..." style="display:none" id="">
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // to delete comment
+            $("a#delComment").live("click", function() {
+                $.ajax({
+                    url: $(this).attr('href'),
+                    beforeSend: function() {
+                        $('#loadingCommentList').show();
+                    },
+                    success: function(data) {
+                        getComments();
+                    },
+                    complete: function(data) {
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                });
+                return false;
+            });
+        });
+        </script>
+{% endif %}

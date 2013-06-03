@@ -1,0 +1,71 @@
+ProdProvidersRatesDetall:
+    type: entity
+    table: prod_providers_rates_detall
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        twelvePrice:
+            type: decimal
+            nullable: true
+            column: twelve_price
+        createdAt:
+            type: datetime
+            nullable: false
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: false
+            column: updated_at
+    manyToOne:
+        backUsersOld:
+            targetEntity: BackUsersOld
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_users_old_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backModels:
+            targetEntity: BackModels
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_models_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backGroupsColors:
+            targetEntity: BackGroupsColors
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_groups_colors_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backSizes:
+            targetEntity: BackSizes
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_sizes_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        prodProvidersRates:
+            targetEntity: ProdProvidersRates
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                prod_providers_rates_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

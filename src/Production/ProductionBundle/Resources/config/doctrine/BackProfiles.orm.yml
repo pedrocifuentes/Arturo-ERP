@@ -1,0 +1,30 @@
+Production\ProductionBundle\Entity\BackProfiles:
+    type: entity
+    table: back_profiles
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 100
+            fixed: false
+            nullable: false
+        docStatus:
+            type: boolean
+            nullable: false
+            column: doc_status
+        updatedAt:
+            type: datetime
+            nullable: false
+            column: updated_at
+        createdAt:
+            type: datetime
+            nullable: false
+            column: created_at
+    lifecycleCallbacks: {  }

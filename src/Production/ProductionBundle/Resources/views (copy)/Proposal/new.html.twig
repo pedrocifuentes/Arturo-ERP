@@ -1,0 +1,231 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<h1>PurchaseProposal creation</h1>
+
+<form action="{{ path('ProductionBundle_proposal_new') }}" method="post">
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Create</button>
+        </p>
+</form>
+
+    <script type="text/javascript">
+
+
+      $(function(){
+
+        $( "#txtdatepropuesta" ).datepicker();
+
+        //ELIMINAR filas detalle
+        $('.btn_del').click(function(){
+          var tableOB =  $(this).parent().parent().parent().parent();
+
+          if($("#body-detall > table").length >1){
+            tableOB.remove();
+            sumDetall();
+          }else{
+            alert('Remove canceled');
+
+          }
+
+        });
+
+        //AGREGAR filas detalle
+        $(".bt_add").each(function (el){
+          $(this).bind("click",addField)
+        });
+
+        $('.modelo').change(function(){
+          var objSelectTable = $(this).parent().parent().parent().parent();
+
+          if($(this).val() != ''){
+            if(objSelectTable.attr('id') > 1 && $(this).val() != $('select[name="data[propuestadetall][1][productos_id]"]').val()){
+              alert('<?php echo __("SOLO PUEDE INTRODUCIR UN MODELO POR PROPUESTA DE COMPRAS"); ?>');
+              $(this).parent().parent().find("select").eq(1).html('<option value="">Seleccionar</option>');
+              var trOB = $(this).parent().parent();
+              trOB.children('td.talldetall').each(function (el){
+                $(this).remove();
+              });
+            }else{  
+              loadSelectColor($(this), 'colores');
+            }
+            //carga tallas
+            //loadTdTall($(this), 'tallas');
+
+            $(this).parent().children('span').eq(0).text($("option:selected", $(this)).text());
+
+          }else{
+            $(this).parent().parent().find("select").eq(1).html('<option value="">Seleccionar</option>');
+          }
+    
+        });
+
+
+        $('#btnguardar').click(function(){
+          if(fun_rechack_pass('<?php echo url_for('/produccion/' . $sf_user->getCulture() . '/home/rechack_pass'); ?>','produccion','/#')){  
+            $("#frmpropuesta").submit();
+          }	
+        });
+
+        $('#btnguardartop').click(function(){
+          if(fun_rechack_pass('<?php echo url_for('/produccion/' . $sf_user->getCulture() . '/home/rechack_pass'); ?>','produccion','/#')){
+            $("#frmpropuesta").submit();
+          }
+        });
+  
+        $("#frmpropuesta").submit(function() {
+          var numReg = /^[0-9]*(\,[0-9]+)?$/;
+
+          /*if(!numReg.test($('.numdata').val())){
+          alert("Incorrect val");
+          return false;
+        }*/
+
+        });
+
+        $('.color').change(function(){
+          var trOB = $(this).parent().parent();
+          var prodOB = trOB.find("select").eq(0);
+
+          loadTdTall(prodOB, 'tallas');
+
+        });
+
+      });
+
+
+
+
+      //carfga colores
+      function loadSelectColor(prod, table){
+        if(fun_rechack_pass('<?php echo url_for('/produccion/' . $sf_user->getCulture() . '/home/rechack_pass'); ?>','produccion','/#')){	
+          var trOB =prod.parent().parent();
+	
+          var colorOB = trOB.find("select").eq(1);
+	
+          var data = {};data.prod = prod.val();data.forselect = table;
+          $.ajax({
+            url: "<?php echo url_for('/stock/index.php/es/depositos/fillcombo') ?>",
+            data: data,
+            beforeSend: function(){
+              $('#loading-colores').show();
+              colorOB.html('').html('<option>Loading...</option>');
+              colorOB.attr('disabled', true);
+            },
+            success: function(data){
+              //carga colores
+              colorOB.html(data);
+              colorOB.find("option[value='todos']").remove();
+            },
+            complete: function(data){
+              colorOB.attr('disabled', false);
+              $('#loading-colores').hide();
+              loadTdTall(prod, 'tallas');
+            },
+            error: function(data){
+              //alert(data);
+            },
+          });
+        } 
+
+      }
+
+      //carga tallas y sus precios
+      function loadTdTall(prod, table){
+        if(fun_rechack_pass('<?php echo url_for('/produccion/' . $sf_user->getCulture() . '/home/rechack_pass'); ?>','produccion','/#')){
+          var trOB =prod.parent().parent();
+          var tableOB =trOB.parent().parent();
+	
+          var colorOB = trOB.find("select").eq(1);
+	
+          var data = {};
+          data.prod = prod.val();
+          data.color = colorOB.val();
+          data.tarifa = $('#cbotarifa').val();
+          data.idtabla = tableOB.attr('id');
+          data.forselect = table;
+	
+          $.ajax({
+            url: "<?php echo url_for('propuestacompras/filltable') ?>",
+            data: data,
+            beforeSend: function(){
+              colorOB.attr('disabled', true);
+              prod.attr('disabled', true);
+	
+	
+              trOB.children('td.talldetall').each(function (el){
+                $(this).remove();
+              });
+	      
+	
+              $('#loading-tallas').show();
+            },
+            success: function(data){
+	      
+              trOB.find("td").eq(1).after(data);
+	    
+            },
+            complete: function(data){
+              colorOB.attr('disabled', false);
+              prod.attr('disabled', false);
+              $('#loading-tallas').hide();
+            },
+            error: function(data){
+              //alert(data);
+            },
+          });
+        }  
+
+      }
+
+      function addField(tdselect){
+
+        if(fun_rechack_pass('<?php echo url_for('/produccion/' . $sf_user->getCulture() . '/home/rechack_pass'); ?>','produccion','/#')){
+          //var clickID = parseInt($(this).parent('div').attr('id').replace('div_',''));
+          //var newID = (clickID+1);
+	
+          var objTr = $(this).parent().parent();
+	  
+          $newClone = $('.propuesta-clone').clone(true);
+          $newClone.removeClass('propuesta-clone');
+          $newClone.show();
+	
+          var idLastTable = parseInt($('#body-detall table').last().attr('id'));  
+	
+          var newIDtable = idLastTable + 1;
+	
+          $('#body-detall').append($newClone);
+	
+          $newClone.attr("id",newIDtable);
+	
+          $newClone.find("select").eq(0).attr({
+            name: 'data[propuestadetall]['+newIDtable+'][productos_id]',
+          });
+	
+          $newClone.find("select").eq(0).val(objTr.find('select').eq(0).val());
+          $newClone.find("span").eq(0).text(objTr.find('span').eq(0).text());
+          $newClone.find("select").eq(1).html(objTr.find('select').eq(1).html());
+	  
+          $newClone.find("select").eq(1).attr({
+            name: 'data[propuestadetall]['+newIDtable+'][colores_id]'
+          });
+        } 
+      }
+
+
+      //PREPARA los datos para la suma
+      function toNumber(obj){
+        //var fullcost = parseFloat($("#fullcost").text());
+        var num = obj.val().replace(',', '.');
+  
+        if($.isNumeric(num)) {
+          return parseFloat(num);
+        }else{
+          obj.val('');
+          return parseFloat(0);
+        }
+      }
+
+        </script>
+{% endblock %}

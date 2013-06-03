@@ -1,0 +1,30 @@
+prodcalendarordersdetail:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:ProdCalendarOrdersDetail:index" }
+
+prodcalendarordersdetail_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:ProdCalendarOrdersDetail:show" }
+
+prodcalendarordersdetail_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:ProdCalendarOrdersDetail:new" }
+
+prodcalendarordersdetail_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:ProdCalendarOrdersDetail:create" }
+    requirements: { _method: post }
+
+prodcalendarordersdetail_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:ProdCalendarOrdersDetail:edit" }
+
+prodcalendarordersdetail_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:ProdCalendarOrdersDetail:update" }
+    requirements: { _method: post|put }
+
+prodcalendarordersdetail_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:ProdCalendarOrdersDetail:delete" }
+    requirements: { _method: post|delete }

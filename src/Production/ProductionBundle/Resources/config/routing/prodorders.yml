@@ -1,0 +1,59 @@
+prodorders:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:ProdOrders:index" }
+
+prodorders_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:ProdOrders:show" }
+
+prodorders_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:ProdOrders:new" }
+
+prodorders_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:ProdOrders:create" }
+    requirements: { _method: post }
+
+prodorders_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:ProdOrders:edit" }
+
+prodorders_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:ProdOrders:update" }
+    requirements: { _method: post|put }
+
+prodorders_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:ProdOrders:delete" }
+    requirements: { _method: post|delete }
+
+prodorders_getmodelcolors:
+    pattern:  /{id}/getmodelcolors
+    defaults: { _controller: "ProductionBundle:ProdOrders:getmodelcolors" }
+
+prodorders_getmodelsizes:
+    pattern:  /{id}/getmodelsizes
+    defaults: { _controller: "ProductionBundle:ProdOrders:getmodelsizes" }
+
+prodorders_getcolortosize:
+    pattern:  /getcolortosize
+    defaults: { _controller: "ProductionBundle:ProdOrders:getcolortosize" }
+
+prodorders_addcomment:
+    pattern:  /addcomment
+    defaults: { _controller: "ProductionBundle:ProdOrders:addcomment" }
+
+prodorders_getcomments:
+    pattern:  /getcomments
+    defaults: { _controller: "ProductionBundle:ProdOrders:getcomments" }
+
+prodorders_delcomments:
+    pattern:  /delcomments
+    defaults: { _controller: "ProductionBundle:ProdOrders:delcomments" }
+
+prodorders_mail:
+    pattern:  /mail
+    defaults: { _controller: "ProductionBundle:ProdOrders:mail" }
+

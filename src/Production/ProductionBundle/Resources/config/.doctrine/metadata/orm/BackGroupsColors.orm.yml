@@ -1,0 +1,29 @@
+BackGroupsColors:
+    type: entity
+    table: back_groups_colors
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: IDENTITY
+    fields:
+        active:
+            type: boolean
+            nullable: true
+        name:
+            type: string
+            length: 20
+            fixed: false
+            nullable: false
+        createdAt:
+            type: datetime
+            nullable: false
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: false
+            column: updated_at
+    lifecycleCallbacks: {  }

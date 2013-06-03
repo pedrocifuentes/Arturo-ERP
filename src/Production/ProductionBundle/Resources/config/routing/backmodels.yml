@@ -1,0 +1,30 @@
+backmodels:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:BackModels:index" }
+
+backmodels_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:BackModels:show" }
+
+backmodels_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:BackModels:new" }
+
+backmodels_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:BackModels:create" }
+    requirements: { _method: post }
+
+backmodels_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:BackModels:edit" }
+
+backmodels_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:BackModels:update" }
+    requirements: { _method: post|put }
+
+backmodels_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:BackModels:delete" }
+    requirements: { _method: post|delete }

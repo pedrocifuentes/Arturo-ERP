@@ -1,0 +1,54 @@
+<input type="hidden" name="box_limit" id="box_limit" value="{{ box_limit }}" />
+<table>
+    <tr>
+        {% for size in sizes %}
+            <td>
+            {{ size.name }}
+            <br />
+            <input type="text" name="sizes[{{ color_id }}][]" class="size colSize_{{ color_id }}" maxlength="" size="5" onkeyup="sumRow({{ color_id }})" />
+            <input type="hidden" name="size_ids[{{ color_id }}][]" value="{{ size.id }}" />
+            </td>
+        {% endfor %}
+    </tr>
+</table>
+<script type="text/javascript">
+
+  $('input.size').focusout(function(){
+        var box_limit = parseInt($("#box_limit").val());
+        var val = parseInt($(this).val());
+
+        if(val > 0){
+            if(val%box_limit != 0){
+                $(this).val('');
+                alert('Caja = '+box_limit+' uds.');
+            }
+        }
+  });
+
+  function issizexCaja(obj){
+    objRow = obj.parent().parent();
+    sizexcaja = parseInt(objRow.find('input#box_limit').eq(0).val());
+    sizeidad = parseInt(obj.val());
+
+    if(sizeidad > 0){
+      if(sizeidad%sizexcaja != 0){
+        obj.val('');
+        alert('Caja = '+sizexcaja+' uds.');
+      }
+    }
+
+  }
+
+function toNumber(obj){
+	  //var fullcost = parseFloat($("#fullcost").text());
+	  var num = obj.text().replace(',', '.');
+
+	  if($.isNumeric(num)) {
+	    return parseFloat(num);
+	  }else{
+	    obj.val('');
+	    return parseFloat(0);
+	  }
+	}
+
+</script>

@@ -1,0 +1,31 @@
+Production\ProductionBundle\Entity\BackModelsHasBackSizes:
+    type: entity
+    table: back_models_has_back_sizes
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: AUTO
+    manyToOne:
+        backModels:
+            targetEntity: BackModels
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_models_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backSizes:
+            targetEntity: BackSizes
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_sizes_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

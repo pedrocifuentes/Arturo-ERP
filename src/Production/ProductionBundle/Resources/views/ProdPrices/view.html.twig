@@ -1,0 +1,144 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<script type="text/javascript" src="{{ asset('js/jquery.jeditable.mini.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#btn-edit').click(function(){
+            $(".prodrates").find("span").addClass("edit-rate");
+            $("#btn-delete").show();
+            $("#btn-cancel").show();
+            $("#btn-edit").hide();
+        });
+
+        $('select#model').live("change", function(){
+            $('#mgsp tbody#mgspBody tr.tr-0').hide()
+            $('#mgsp tbody#mgspBody tr.tr-' + $(this).val() + '').show();
+        });
+
+        $('.edit-rate').live("click", function(){
+            /*$("span.edit-rate").html($(this).next().val());
+                
+            if($(this).find("form")){
+                $(this).html("<form><input type='text' name='newvalue' id='newvalue' value='"+ $(this).next().val() +"' maxlength='12' size='3' /></form>");
+            }*/
+        });
+
+        $('#btn-cancel').live("click", function(){
+            $("#newvalue").val();
+            $("span.edit-rate").html($("#newvalue").val());
+        });
+            
+        $('.talledit').editable("{{ path('prodprices_saveprice') }}", { 
+             id   : 'elementid',
+             name : 'newvalue',
+             indicator : '<img src="/images/refresh.gif">'
+        });
+    });
+    </script>
+    <h1>Providers Rates</h1>
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Rate Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Supplier Id</th>
+                <td>{{ entity.prodProvider.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ entity.prodProvider.name }}</td>
+            </tr>
+            <tr>
+                <th>Fromdate</th>
+                <td>{{ entity.fromDate|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Todate</th>
+                <td>{{ entity.toDate|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Cotton price ($/kg)</th>
+                <td>{{ entity.cottonPrice }}</td>
+            </tr>
+            <tr>
+                <th>Model</th>
+                <td>
+                    <select name="model" id="model">
+                        <option value="0">All</option>
+                        {% for model in models %}
+                        <option value="{{ model.id }}">{{ model.code }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+        </tbody>
+    </table>
+    <table width="100%" id="mgsp">
+        <thead>
+        <th>Models</th>
+            {% for gc in group_colors %}
+        <th>{{ gc.name }}</th>
+            {% endfor %}
+    </thead>
+    <tbody id="mgspBody">
+            {% for model in models %}
+            <tr class="tr-{{ model.id }} tr-0">
+                <td>{{ model.code }}</td>
+                    {% for gc in group_colors %}
+                        {% if model.master_size|length > 0 %}
+                            {% set total_col = 7 %}
+                            {% set nro_tallas = model.tallas|length %}
+                            {% set empty_cell_left = 0 %}
+                            {% set empty_cell_right = 0 %}
+                            {% set num_talla_master = 1 %}
+                            {% set nro_tallas = model.tallas|length %}
+                        {% else %}
+                            {% set empty_cell_right = do  %}
+                        {% endif %}
+                <td>
+                    <table>
+                        <tr>
+                            {% for ts in model.tallas %}
+                                <td> {{ ts.name }}</td>
+                            {% endfor %}
+                            </tr>
+                            <tr>
+                            {% for ts in model.tallas %}
+                                    {% set default_price = "00.00" %}
+                                {% if prices[entity.id~"-"~gc.id~"-"~model.id~"-"~ts.id] is defined %}
+                                    {% set default_price = prices[entity.id~"-"~gc.id~"-"~model.id~"-"~ts.id] %}
+                                {% endif %}                                    
+                                    <td class="prodrates">
+                                        <span id="price-{{ entity.id }}-{{ gc.id }}-{{ ts.id }}-{{ model.id }}" class="talledit">{{ default_price }}</span>
+                                        <input type="hidden" name="hidden-price-{{ entity.id }}-{{ gc.id }}-{{ ts.id }}-{{ model.id }}" id="hidden-price-{{ gc.id }}-{{ ts.id }}-{{ model.id }}" value="00,00" />
+                                    </td>
+                            {% endfor %}
+                                </tr>
+                            </table>
+                        </td>
+                    {% endfor %}
+                    </tr>
+            {% endfor %}
+                </tbody>
+            </table>
+            <ul class="record_actions">
+                <li>
+                    <a href="{{ path('prodprices') }}">
+                        Back to the list
+                    </a>
+                </li>
+                <li>
+                    <a id="btn-edit" class="btn btn-primary" href="#">Edit</a>
+                    <form action="{{ path('prodprices_delete', { 'id': entity.id }) }}" method="post">
+                        <input type="hidden" name="_method" value="DELETE" />
+                {{ form_widget(delete_form) }}
+                        <button id="btn-delete" type="submit" style="display: none;">Delete</button>
+                    </form>
+                    <a id="btn-cancel" href="#" style="display: none;">Cancel</a>
+                </li>
+            </ul>
+{% endblock %}

@@ -1,0 +1,54 @@
+Production\ProductionBundle\Entity\ProdCalendarOrdersDetail:
+    type: entity
+    table: prod_calendar_orders_detail
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        items:
+            type: integer
+            unsigned: false
+            nullable: true
+    manyToOne:
+        prodCalendarOrder:
+            targetEntity: ProdCalendarOrders
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                prod_calendar_order_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backModel:
+            targetEntity: BackModels
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_model_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backColor:
+            targetEntity: BackColors
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_color_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backSize:
+            targetEntity: BackSizes
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_size_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

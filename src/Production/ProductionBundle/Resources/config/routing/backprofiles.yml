@@ -1,0 +1,30 @@
+backprofiles:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:BackProfiles:index" }
+
+backprofiles_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:BackProfiles:show" }
+
+backprofiles_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:BackProfiles:new" }
+
+backprofiles_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:BackProfiles:create" }
+    requirements: { _method: post }
+
+backprofiles_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:BackProfiles:edit" }
+
+backprofiles_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:BackProfiles:update" }
+    requirements: { _method: post|put }
+
+backprofiles_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:BackProfiles:delete" }
+    requirements: { _method: post|delete }

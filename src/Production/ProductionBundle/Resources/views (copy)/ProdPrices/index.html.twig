@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>ProdPrices list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fromdate</th>
+                <th>Todate</th>
+                <th>Cottonprice</th>
+                <th>Docstatus</th>
+                <th>Active</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('prodprices_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.fromDate %}{{ entity.fromDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.toDate %}{{ entity.toDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.cottonPrice }}</td>
+                <td>{{ entity.docStatus }}</td>
+                <td>{{ entity.active }}</td>
+                <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('prodprices_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('prodprices_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('prodprices_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

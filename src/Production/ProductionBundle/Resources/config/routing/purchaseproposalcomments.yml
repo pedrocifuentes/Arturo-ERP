@@ -1,0 +1,30 @@
+purchaseproposalcomments:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:PurchaseProposalComments:index" }
+
+purchaseproposalcomments_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:PurchaseProposalComments:show" }
+
+purchaseproposalcomments_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:PurchaseProposalComments:new" }
+
+purchaseproposalcomments_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:PurchaseProposalComments:create" }
+    requirements: { _method: post }
+
+purchaseproposalcomments_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:PurchaseProposalComments:edit" }
+
+purchaseproposalcomments_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:PurchaseProposalComments:update" }
+    requirements: { _method: post|put }
+
+purchaseproposalcomments_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:PurchaseProposalComments:delete" }
+    requirements: { _method: post|delete }

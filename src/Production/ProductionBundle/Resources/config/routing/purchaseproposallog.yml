@@ -1,0 +1,30 @@
+purchaseproposallog:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:PurchaseProposalLog:index" }
+
+purchaseproposallog_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:PurchaseProposalLog:show" }
+
+purchaseproposallog_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:PurchaseProposalLog:new" }
+
+purchaseproposallog_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:PurchaseProposalLog:create" }
+    requirements: { _method: post }
+
+purchaseproposallog_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:PurchaseProposalLog:edit" }
+
+purchaseproposallog_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:PurchaseProposalLog:update" }
+    requirements: { _method: post|put }
+
+purchaseproposallog_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:PurchaseProposalLog:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,67 @@
+Production\ProductionBundle\Entity\ProdOrdersDetail:
+    type: entity
+    table: prod_orders_detail
+    id:
+        prod_order_id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+        back_model_id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+        back_color_id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+        back_size_id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+    fields:
+        items:
+            type: integer
+            unsigned: false
+            nullable: false  
+    oneToOne:
+        backColor:
+            targetEntity: BackColors
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_color_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backModel:
+            targetEntity: BackModels
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_model_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backSize:
+            targetEntity: BackSizes
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_size_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        prodOrder:
+            targetEntity: ProdOrders
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                prod_order_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

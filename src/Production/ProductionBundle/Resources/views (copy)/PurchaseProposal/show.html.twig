@@ -1,0 +1,74 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>PurchaseProposal</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Docno</th>
+                <td>{{ entity.docNo }}</td>
+            </tr>
+            <tr>
+                <th>Docnavisionid</th>
+                <td>{{ entity.docNavisionId }}</td>
+            </tr>
+            <tr>
+                <th>Docpieces</th>
+                <td>{{ entity.docPieces }}</td>
+            </tr>
+            <tr>
+                <th>Docdate</th>
+                <td>{{ entity.docDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Docstatus</th>
+                <td>{{ entity.docStatus }}</td>
+            </tr>
+            <tr>
+                <th>Docdelete</th>
+                <td>{{ entity.docDelete }}</td>
+            </tr>
+            <tr>
+                <th>Accepteddate</th>
+                <td>{{ entity.acceptedDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Paymentdate</th>
+                <td>{{ entity.paymentDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Paymentexchange</th>
+                <td>{{ entity.paymentExchange }}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{{ entity.updatedAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('purchaseproposal') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('purchaseproposal_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('purchaseproposal_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

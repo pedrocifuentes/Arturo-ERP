@@ -1,0 +1,211 @@
+FosUserUser:
+    type: entity
+    table: fos_user_user
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        username:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+        usernameCanonical:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+            column: username_canonical
+        email:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+        emailCanonical:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+            column: email_canonical
+        enabled:
+            type: boolean
+            nullable: false
+        salt:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+        password:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+        lastLogin:
+            type: datetime
+            nullable: true
+            column: last_login
+        locked:
+            type: boolean
+            nullable: false
+        expired:
+            type: boolean
+            nullable: false
+        expiresAt:
+            type: datetime
+            nullable: true
+            column: expires_at
+        confirmationToken:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+            column: confirmation_token
+        passwordRequestedAt:
+            type: datetime
+            nullable: true
+            column: password_requested_at
+        roles:
+            type: array
+            nullable: false
+        credentialsExpired:
+            type: boolean
+            nullable: false
+            column: credentials_expired
+        credentialsExpireAt:
+            type: datetime
+            nullable: true
+            column: credentials_expire_at
+        createdAt:
+            type: datetime
+            nullable: false
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: false
+            column: updated_at
+        dateOfBirth:
+            type: datetime
+            nullable: true
+            column: date_of_birth
+        firstname:
+            type: string
+            length: 64
+            fixed: false
+            nullable: true
+        lastname:
+            type: string
+            length: 64
+            fixed: false
+            nullable: true
+        website:
+            type: string
+            length: 64
+            fixed: false
+            nullable: true
+        biography:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        gender:
+            type: string
+            length: 1
+            fixed: false
+            nullable: true
+        locale:
+            type: string
+            length: 8
+            fixed: false
+            nullable: true
+        timezone:
+            type: string
+            length: 64
+            fixed: false
+            nullable: true
+        phone:
+            type: string
+            length: 64
+            fixed: false
+            nullable: true
+        facebookUid:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+            column: facebook_uid
+        facebookName:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+            column: facebook_name
+        facebookData:
+            type: json
+            nullable: true
+            column: facebook_data
+        twitterUid:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+            column: twitter_uid
+        twitterName:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+            column: twitter_name
+        twitterData:
+            type: json
+            nullable: true
+            column: twitter_data
+        gplusUid:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+            column: gplus_uid
+        gplusName:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+            column: gplus_name
+        gplusData:
+            type: json
+            nullable: true
+            column: gplus_data
+        token:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        twoStepCode:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+            column: two_step_code
+    manyToMany:
+        group:
+            targetEntity: FosUserGroup
+            cascade: {  }
+            mappedBy: null
+            inversedBy: user
+            joinTable:
+                name: fos_user_user_group
+                joinColumns:
+                    -
+                        name: user_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: group_id
+                        referencedColumnName: id
+            orderBy: null
+    lifecycleCallbacks: {  }

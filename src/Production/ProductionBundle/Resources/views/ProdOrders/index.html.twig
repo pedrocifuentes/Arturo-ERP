@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>ProdOrders list</h1>
+
+    <table class="records_list" style="width: 80%;">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Navision</th>
+                <th>Items</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Supplier</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('prodorders_show', { 'id': entity.id }) }}">{{ entity.docNo }}</a></td>
+                <td>{{ entity.docNavision }}</td>
+                <td>{{ entity.docItems }}</td>
+                <td>{% if entity.docDate %}{{ entity.docDate|date('d/m/Y') }}{% endif %}</td>
+                <td>{{ entity.docStatus == '5' ? 'Deleted' : entity.docStatus == '3' ? 'Rejected' :  entity.docStatus == '4' ? 'Blocked' : entity.docStatus == '2' ? 'Accepted' : 'Pending' }}</td>
+                <td>{% if entity.createdAt %}{{ entity.createdAt|date('d/m/Y') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('prodorders_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('prodorders_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('prodorders_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

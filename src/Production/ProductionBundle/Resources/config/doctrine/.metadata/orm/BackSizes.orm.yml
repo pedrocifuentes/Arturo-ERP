@@ -1,0 +1,32 @@
+BackSizes:
+    type: entity
+    table: back_sizes
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        active:
+            type: boolean
+            nullable: true
+        sort:
+            type: boolean
+            nullable: true
+        name:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+    manyToMany:
+        model:
+            targetEntity: BackModels
+            cascade: {  }
+            mappedBy: size
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

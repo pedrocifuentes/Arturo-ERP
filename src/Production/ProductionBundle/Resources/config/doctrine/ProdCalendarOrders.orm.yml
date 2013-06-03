@@ -1,0 +1,62 @@
+Production\ProductionBundle\Entity\ProdCalendarOrders:
+    type: entity
+    table: prod_calendar_orders
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 100
+            fixed: false
+            nullable: false
+        fromDate:
+            type: date
+            nullable: false
+            column: from_date
+        toDate:
+            type: date
+            nullable: false
+            column: to_date
+        googleUrl:
+            type: string
+            length: 200
+            fixed: false
+            nullable: true
+            column: google_url
+        description:
+            type: text
+            nullable: true
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+    manyToOne:
+        prodOrder:
+            targetEntity: ProdOrders
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                prod_order_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backUser:
+            targetEntity: BackUsersOld
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_user_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

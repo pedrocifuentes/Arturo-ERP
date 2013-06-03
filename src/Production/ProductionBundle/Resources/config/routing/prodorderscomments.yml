@@ -1,0 +1,30 @@
+prodorderscomments:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:ProdOrdersComments:index" }
+
+prodorderscomments_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:ProdOrdersComments:show" }
+
+prodorderscomments_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:ProdOrdersComments:new" }
+
+prodorderscomments_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:ProdOrdersComments:create" }
+    requirements: { _method: post }
+
+prodorderscomments_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:ProdOrdersComments:edit" }
+
+prodorderscomments_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:ProdOrdersComments:update" }
+    requirements: { _method: post|put }
+
+prodorderscomments_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:ProdOrdersComments:delete" }
+    requirements: { _method: post|delete }

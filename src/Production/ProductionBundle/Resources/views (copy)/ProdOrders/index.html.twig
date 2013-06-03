@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>ProdOrders list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Docno</th>
+                <th>Docnavision</th>
+                <th>Docitems</th>
+                <th>Docdate</th>
+                <th>Docstatus</th>
+                <th>Accepteddate</th>
+                <th>Paymentdate</th>
+                <th>Paymentexchange</th>
+                <th>Updatedat</th>
+                <th>Createdat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('prodorders_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.docNo }}</td>
+                <td>{{ entity.docNavision }}</td>
+                <td>{{ entity.docItems }}</td>
+                <td>{% if entity.docDate %}{{ entity.docDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.docStatus }}</td>
+                <td>{% if entity.acceptedDate %}{{ entity.acceptedDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.paymentDate %}{{ entity.paymentDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.paymentExchange }}</td>
+                <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('prodorders_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('prodorders_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('prodorders_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

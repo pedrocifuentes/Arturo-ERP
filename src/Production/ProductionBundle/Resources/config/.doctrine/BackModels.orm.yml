@@ -1,0 +1,74 @@
+Production\ProductionBundle\Entity\BackModels:
+    type: entity
+    table: back_models
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        active:
+            type: boolean
+            nullable: true
+        sort:
+            type: integer
+            unsigned: true
+            nullable: true
+        name:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+        code:
+            type: string
+            length: 30
+            fixed: false
+            nullable: false
+        masterSize:
+            type: string
+            length: 10
+            fixed: false
+            nullable: false
+            column: master_size
+        new:
+            type: boolean
+            nullable: true
+        bag:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        box:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        weightWhite:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+            column: weight_white
+        weightColor:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+            column: weight_color
+        slug:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+    lifecycleCallbacks: {  }

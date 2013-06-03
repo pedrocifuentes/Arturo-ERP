@@ -1,0 +1,30 @@
+backsizes:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:BackSizes:index" }
+
+backsizes_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:BackSizes:show" }
+
+backsizes_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:BackSizes:new" }
+
+backsizes_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:BackSizes:create" }
+    requirements: { _method: post }
+
+backsizes_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:BackSizes:edit" }
+
+backsizes_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:BackSizes:update" }
+    requirements: { _method: post|put }
+
+backsizes_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:BackSizes:delete" }
+    requirements: { _method: post|delete }

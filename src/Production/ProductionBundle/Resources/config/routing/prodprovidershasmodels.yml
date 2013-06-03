@@ -1,0 +1,30 @@
+prodprovidershasmodels:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:ProdProvidersHasModels:index" }
+
+prodprovidershasmodels_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:ProdProvidersHasModels:show" }
+
+prodprovidershasmodels_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:ProdProvidersHasModels:new" }
+
+prodprovidershasmodels_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:ProdProvidersHasModels:create" }
+    requirements: { _method: post }
+
+prodprovidershasmodels_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:ProdProvidersHasModels:edit" }
+
+prodprovidershasmodels_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:ProdProvidersHasModels:update" }
+    requirements: { _method: post|put }
+
+prodprovidershasmodels_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:ProdProvidersHasModels:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,30 @@
+backusersold:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:BackUsersOld:index" }
+
+backusersold_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:BackUsersOld:show" }
+
+backusersold_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:BackUsersOld:new" }
+
+backusersold_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:BackUsersOld:create" }
+    requirements: { _method: post }
+
+backusersold_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:BackUsersOld:edit" }
+
+backusersold_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:BackUsersOld:update" }
+    requirements: { _method: post|put }
+
+backusersold_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:BackUsersOld:delete" }
+    requirements: { _method: post|delete }

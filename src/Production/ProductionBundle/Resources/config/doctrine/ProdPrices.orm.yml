@@ -1,0 +1,67 @@
+Production\ProductionBundle\Entity\ProdPrices:
+    type: entity
+    table: prod_prices
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        fromDate:
+            type: date
+            nullable: true
+            column: from_date
+        toDate:
+            type: date
+            nullable: true
+            column: to_date
+        cottonPrice:
+            type: decimal
+            nullable: true
+            column: cotton_price
+        docStatus:
+            type: boolean
+            nullable: false
+            column: doc_status
+        active:
+            type: boolean
+            nullable: true
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+    manyToMany:
+        prodOrder:
+            targetEntity: ProdOrders
+            cascade: {  }
+            mappedBy: prodPrice
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    manyToOne:
+        backUser:
+            targetEntity: BackUsersOld
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_user_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        prodProvider:
+            targetEntity: ProdProviders
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                prod_provider_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

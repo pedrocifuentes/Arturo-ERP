@@ -1,0 +1,115 @@
+production:
+    resource: "@ProductionBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ProductionBundle_prodproviders:
+    resource: "@ProductionBundle/Resources/config/routing/prodproviders.yml"
+    prefix:   /prodproviders
+
+ProductionBundle_prodpricesdetail:
+    resource: "@ProductionBundle/Resources/config/routing/prodpricesdetail.yml"
+    prefix:   /prodpricesdetail
+
+ProductionBundle_prodprices:
+    resource: "@ProductionBundle/Resources/config/routing/prodprices.yml"
+    prefix:   /prodprices
+
+ProductionBundle_prodordersdetail:
+    resource: "@ProductionBundle/Resources/config/routing/prodordersdetail.yml"
+    prefix:   /prodordersdetail
+
+ProductionBundle_prodorderscomments:
+    resource: "@ProductionBundle/Resources/config/routing/prodorderscomments.yml"
+    prefix:   /prodorderscomments
+
+ProductionBundle_prodorders:
+    resource: "@ProductionBundle/Resources/config/routing/prodorders.yml"
+    prefix:   /prodorders
+
+ProductionBundle_prodcalendarordersdetail:
+    resource: "@ProductionBundle/Resources/config/routing/prodcalendarordersdetail.yml"
+    prefix:   /prodcalendarordersdetail
+
+ProductionBundle_prodcalendarorders:
+    resource: "@ProductionBundle/Resources/config/routing/prodcalendarorders.yml"
+    prefix:   /prodcalendarorders
+
+ProductionBundle_fosuseruser:
+    resource: "@ProductionBundle/Resources/config/routing/fosuseruser.yml"
+    prefix:   /fosuseruser
+
+ProductionBundle_backbusinessunits:
+    resource: "@ProductionBundle/Resources/config/routing/backbusinessunits.yml"
+    prefix:   /backbusinessunits
+
+ProductionBundle_backbusinessunittypes:
+    resource: "@ProductionBundle/Resources/config/routing/backbusinessunittypes.yml"
+    prefix:   /backbusinessunittypes
+
+ProductionBundle_backcolors:
+    resource: "@ProductionBundle/Resources/config/routing/backcolors.yml"
+    prefix:   /backcolors
+
+ProductionBundle_backcountries:
+    resource: "@ProductionBundle/Resources/config/routing/backcountries.yml"
+    prefix:   /backcountries
+
+ProductionBundle_backgroupscolors:
+    resource: "@ProductionBundle/Resources/config/routing/backgroupscolors.yml"
+    prefix:   /backgroupscolors
+
+ProductionBundle_backlanguages:
+    resource: "@ProductionBundle/Resources/config/routing/backlanguages.yml"
+    prefix:   /backlanguages
+
+ProductionBundle_backmodels:
+    resource: "@ProductionBundle/Resources/config/routing/backmodels.yml"
+    prefix:   /backmodels
+
+ProductionBundle_backprofiles:
+    resource: "@ProductionBundle/Resources/config/routing/backprofiles.yml"
+    prefix:   /backprofiles
+
+ProductionBundle_backsizes:
+    resource: "@ProductionBundle/Resources/config/routing/backsizes.yml"
+    prefix:   /backsizes
+
+ProductionBundle_backusersold:
+    resource: "@ProductionBundle/Resources/config/routing/backusersold.yml"
+    prefix:   /backusersold
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /change-password
+
+soanata_user:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+
+# error-prevention
+homepage:
+ pattern: /

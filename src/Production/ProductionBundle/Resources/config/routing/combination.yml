@@ -1,0 +1,30 @@
+combination:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:Combination:index" }
+
+combination_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:Combination:show" }
+
+combination_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:Combination:new" }
+
+combination_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:Combination:create" }
+    requirements: { _method: post }
+
+combination_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:Combination:edit" }
+
+combination_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:Combination:update" }
+    requirements: { _method: post|put }
+
+combination_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:Combination:delete" }
+    requirements: { _method: post|delete }

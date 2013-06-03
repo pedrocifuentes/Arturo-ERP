@@ -1,0 +1,56 @@
+Production\ProductionBundle\Entity\Combination:
+    type: entity
+    table: combination
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: true
+            nullable: false
+            generator:
+                strategy: AUTO
+    fields:
+        active:
+            type: boolean
+            nullable: true
+        name:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+        catalogo:
+            type: boolean
+            nullable: false
+        updatedAt:
+            type: datetime
+            nullable: false
+            column: updated_at
+    manyToOne:
+        backColors:
+            targetEntity: BackColors
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_colors_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backModels:
+            targetEntity: BackModels
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_models_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backSizes:
+            targetEntity: BackSizes
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_sizes_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

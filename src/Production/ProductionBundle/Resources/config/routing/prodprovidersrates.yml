@@ -1,0 +1,38 @@
+prodprovidersrates:
+    pattern:  /
+    defaults: { _controller: "ProductionBundle:ProdProvidersRates:index" }
+
+prodprovidersrates_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ProductionBundle:ProdProvidersRates:show" }
+
+prodprovidersrates_new:
+    pattern:  /new
+    defaults: { _controller: "ProductionBundle:ProdProvidersRates:new" }
+
+prodprovidersrates_create:
+    pattern:  /create
+    defaults: { _controller: "ProductionBundle:ProdProvidersRates:create" }
+    requirements: { _method: post }
+
+prodprovidersrates_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ProductionBundle:ProdProvidersRates:edit" }
+
+prodprovidersrates_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ProductionBundle:ProdProvidersRates:update" }
+    requirements: { _method: post|put }
+
+prodprovidersrates_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ProductionBundle:ProdProvidersRates:delete" }
+    requirements: { _method: post|delete }
+
+prodprovidersrates_pricelist:
+    pattern:  /{id}/pricelist
+    defaults: { _controller: "ProductionBundle:ProdProvidersRates:pricelist" }
+
+prodprovidersrates_view:
+    pattern:  /{id}/view
+    defaults: { _controller: "ProductionBundle:ProdProvidersRates:view" }

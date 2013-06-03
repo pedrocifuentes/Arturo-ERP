@@ -1,0 +1,31 @@
+Production\ProductionBundle\Entity\ProdProvidersHasModels:
+    type: entity
+    table: prod_providers_has_models
+    id:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: AUTO
+    manyToOne:
+        prodProvider:
+            targetEntity: ProdProviders
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                prod_provider_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        backModel:
+            targetEntity: BackModels
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                back_model_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

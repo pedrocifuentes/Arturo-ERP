@@ -1,0 +1,22 @@
+{% for entity in entities %}
+    <tr>
+        <td><a href="{{ path('prodprovidersrates_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+        <td>{{ entity.prodProvider }}</td>
+        <td>{% if entity.fromDate %}{{ entity.fromDate|date('d/m/Y') }}{% endif %}</td>
+        <td>{% if entity.toDate %}{{ entity.toDate|date('d/m/Y') }}{% endif %}</td>
+        <td>{{ entity.cottonPrice }}</td>
+        <td>
+        <ul>
+            <li>
+                        <a href="{{ path('prodprices_view', { 'id': entity.id }) }}">view</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('prodprices_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('prodprices_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+        </ul>
+        </td>
+    </tr>
+{% endfor %}

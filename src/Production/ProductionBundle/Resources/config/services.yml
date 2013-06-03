@@ -1,0 +1,7 @@
+parameters:
+#    production.example.class: Production\ProductionBundle\Example
+
+services:
+#    production.example:
+#        class: %production.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
