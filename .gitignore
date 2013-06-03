@@ -1,0 +1,14 @@
+app/bootstrap.php.cache
+app/cache/*
+app/logs/*
+app/config/parameters.yml
+build/
+bin
+composer.phar
+nbproject
+web/uploads/avatars/*
+web/uploads/*
+*.swp
+.buildpath
+.settings
+.project
